@@ -1,5 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {String} from '../assets/values/String';
 
 export function loginWithEmailIdPassword(email, password, onSuccess, onError) {
   auth()
@@ -40,8 +41,8 @@ export async function signInWithGoogle(onSuccess, onError) {
     .signInWithCredential(googleCredential)
     .then(data => onSuccess(data))
     .catch(error => {
-      if (error.code === 'auth/operation-not-allowed') {
-        onError('Enable anonymous in your firebase console.');
+      if (error.code === String.operationNotAllowed) {
+        onError(String.firebaseConsoleError);
       } else {
         onError(error);
       }
@@ -50,9 +51,8 @@ export async function signInWithGoogle(onSuccess, onError) {
 
 export function setGoogleConfigur() {
   GoogleSignin.configure({
-    scopes: ['email'],
-    webClientId:
-      '172532842385-8fk7scicpuijgckcb45q1p1rv2g9u1l9.apps.googleusercontent.com',
+    scopes: [String.email],
+    webClientId: String.webClientId,
     offlineAccess: true,
   });
 }

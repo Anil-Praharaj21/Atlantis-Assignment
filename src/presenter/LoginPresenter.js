@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {String} from '../assets/values/String';
 import * as reposiotry from '../repository/LoginRepository';
 import * as utils from '../utils/Tools';
 
@@ -121,9 +122,9 @@ export function signInWithGoogle(
 
 export async function storeAsyncData(data, onError) {
   try {
-    await AsyncStorage.setItem('userData', JSON.stringify(data));
+    await AsyncStorage.setItem(String.userData, JSON.stringify(data));
   } catch (e) {
-    onError('Something went wrong. Please try again.');
+    onError(String.somethingWentWrong);
   }
 }
 
