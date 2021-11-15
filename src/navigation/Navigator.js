@@ -5,6 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginScreen from '../screens/LoginScreen';
 import TaskViewScreen from '../screens/TaskViewScreen';
 import AddTaskScreen from '../screens/AddTaskScreen';
+import {String} from '../assets/values/String';
+import {Color} from '../assets/values/Color';
 
 const Stack = createStackNavigator();
 
@@ -13,12 +15,12 @@ const Navigator = rest => {
   const [userDetails, setUserDetails] = useState();
 
   useEffect(() => {
-    getUserDetails();
+    // getUserDetails();
   }, []);
 
   const getUserDetails = async details => {
     try {
-      var user = await AsyncStorage.getItem('userData');
+      var user = await AsyncStorage.getItem(String.userData);
       if (user) {
         setIsAuth(true);
         setUserDetails(user);
@@ -30,7 +32,14 @@ const Navigator = rest => {
     <Stack.Navigator>
       {isAuth ? (
         <>
-          <Stack.Screen name="Todo">
+          <Stack.Screen
+            name={String.todo}
+            options={{
+              headerTintColor: Color.colorOnPrimary,
+              headerStyle: {
+                backgroundColor: Color.colorPrimary,
+              },
+            }}>
             {props => (
               <TaskViewScreen
                 setAuthValue={value => setIsAuth(value)}
@@ -40,7 +49,14 @@ const Navigator = rest => {
             )}
           </Stack.Screen>
 
-          <Stack.Screen name="Add Task">
+          <Stack.Screen
+            name={String.addTask}
+            options={{
+              headerTintColor: Color.colorOnPrimary,
+              headerStyle: {
+                backgroundColor: Color.colorPrimary,
+              },
+            }}>
             {props => (
               <AddTaskScreen
                 setAuthValue={value => setIsAuth(value)}
@@ -52,7 +68,7 @@ const Navigator = rest => {
         </>
       ) : (
         <Stack.Screen
-          name="Login"
+          name={String.login}
           options={{
             headerShown: false,
           }}>

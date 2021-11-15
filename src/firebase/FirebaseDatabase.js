@@ -1,11 +1,10 @@
 import database, {firebase} from '@react-native-firebase/database';
+import {String} from '../assets/values/String';
 
 export function initialize(uid, timeStamp) {
   const reference = firebase
     .app()
-    .database(
-      'https://todolist-7d25a-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    )
+    .database(String.dataBaseUrl)
     .ref(`/todoItem${uid}`);
   return reference;
 }
@@ -29,7 +28,6 @@ export async function createTodoItem(
       description: description,
     },
   };
-  console.log('Parmas', params);
   ref
     .update(params)
     .then(value => {
@@ -54,13 +52,10 @@ export function updateTodoItem(
 export async function getAllTodoItems(uid, onSuccess, onError) {
   const ref = firebase
     .app()
-    .database(
-      'https://todolist-7d25a-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    )
+    .database(String.dataBaseUrl)
     .ref(`/todoItem${uid}`);
 
-  console.log('Ref', ref);
-  const value = await ref
+  await ref
     .once('value')
     .then(value => onSuccess(value))
     .catch(error => {

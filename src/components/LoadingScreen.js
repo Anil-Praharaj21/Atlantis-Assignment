@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Modal, Image, ActivityIndicator} from 'react-native';
+import {View, Modal, ActivityIndicator} from 'react-native';
 
 function LoadingScreen({show}) {
   return (

@@ -4,6 +4,7 @@ import {FAB} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as presenter from '../presenter/TaskViewPresenter';
 import TodoListItem from '../components/TodoListItem';
+import {String} from '../assets/values/String';
 
 class TaskViewScreen extends React.Component {
   constructor(props) {
@@ -24,11 +25,10 @@ class TaskViewScreen extends React.Component {
 
   async getUserData() {
     try {
-      var user = await AsyncStorage.getItem('userData');
+      var user = await AsyncStorage.getItem(String.userData);
       var userData = JSON.parse(user);
 
       if (userData && userData.user && userData.user.uid) {
-        console.log('User', userData);
         this.setState({
           uid: userData.user.uid,
         });
@@ -81,7 +81,7 @@ class TaskViewScreen extends React.Component {
             }}
             icon="plus"
             onPress={() => {
-              this.props.navigation.push('Add Task');
+              this.props.navigation.push(String.addTask);
             }}
           />
         </ScrollView>

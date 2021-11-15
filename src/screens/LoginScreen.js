@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Card, TextInput, Button, HelperText} from 'react-native-paper';
-import GOOGLE_ICON from '../assets/images/google_icon.png';
+import ATLANTIS_ICON from '../assets/images/atlantis_tech.png';
+import {String} from '../assets/values/String';
 import * as presenter from '../presenter/LoginPresenter';
 
 class LoginScreen extends React.Component {
@@ -89,14 +89,31 @@ class LoginScreen extends React.Component {
       <>
         <View
           style={{flex: 1, flexDirection: 'column', justifyContent: 'center'}}>
+          <Image
+            style={{
+              width: '50%',
+              height: '10%',
+              resizeMode: 'center',
+              justifyContent: 'center',
+              alignSelf: 'center',
+            }}
+            source={ATLANTIS_ICON}
+          />
+
           {this.state.loginView ? (
             <Card style={{margin: 8, padding: 8}}>
-              <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: 'black',
+                  fontWeight: 'bold',
+                  marginLeft: 8,
+                }}>
                 Login
               </Text>
 
               <TextInput
-                label="Email"
+                label={String.Email}
                 mode="outlined"
                 autoCapitalize="none"
                 keyboardType="email-address"
@@ -119,7 +136,7 @@ class LoginScreen extends React.Component {
               )}
 
               <TextInput
-                label="Password"
+                label={String.password}
                 mode="outlined"
                 theme={{
                   fonts: {regular: {fontWeight: 'bold'}},
@@ -154,12 +171,24 @@ class LoginScreen extends React.Component {
 
               <Button
                 mode="contained"
-                style={{marginTop: 8}}
+                style={{marginTop: 12}}
                 onPress={() => {
                   this.signInUserWithEmailPassword();
                 }}>
                 Login
               </Button>
+
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  marginTop: 8,
+                  marginBottom: 4,
+                }}>
+                <View style={{flex: 3, height: 2, backgroundColor: 'black'}} />
+                <View style={{flex: 1}} />
+                <View style={{flex: 3, height: 2, backgroundColor: 'black'}} />
+              </View>
 
               <Button
                 mode="contained"
@@ -174,19 +203,25 @@ class LoginScreen extends React.Component {
             </Card>
           ) : (
             <Card style={{margin: 8, padding: 8}}>
-              <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: 'black',
+                  fontWeight: 'bold',
+                  marginLeft: 8,
+                }}>
                 Sign-In
               </Text>
 
               <TextInput
-                label="Email"
+                label={String.Email}
                 mode="outlined"
                 autoCapitalize="none"
                 keyboardType="email-address"
                 theme={{
                   fonts: {regular: {fontWeight: 'bold'}},
                 }}
-                style={{marginTop: 4, marginBottom: 4}}
+                style={{marginTop: 4, marginBottom: 12}}
                 value={this.state.emailSignIn}
                 onChangeText={value => {
                   this.setState({
@@ -204,7 +239,7 @@ class LoginScreen extends React.Component {
               )}
 
               <TextInput
-                label="Password"
+                label={String.password}
                 mode="outlined"
                 theme={{
                   fonts: {regular: {fontWeight: 'bold'}},
@@ -238,7 +273,7 @@ class LoginScreen extends React.Component {
               )}
 
               <TextInput
-                label="Confirm Password"
+                label={String.confirmPassword}
                 mode="outlined"
                 theme={{
                   fonts: {regular: {fontWeight: 'bold'}},
@@ -294,6 +329,18 @@ class LoginScreen extends React.Component {
                 }}>
                 Sign-In
               </Button>
+
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  marginTop: 8,
+                  marginBottom: 4,
+                }}>
+                <View style={{flex: 3, height: 2, backgroundColor: 'black'}} />
+                <View style={{flex: 1}} />
+                <View style={{flex: 3, height: 2, backgroundColor: 'black'}} />
+              </View>
 
               <Button
                 mode="contained"

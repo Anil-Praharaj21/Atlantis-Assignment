@@ -3,6 +3,7 @@ import {ScrollView, View, Text} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as presenter from '../presenter/AddTaskPresenter';
+import {String} from '../assets/values/String';
 
 var ref;
 class AddTaskScreen extends React.Component {
@@ -26,11 +27,10 @@ class AddTaskScreen extends React.Component {
 
   async getUserData() {
     try {
-      var user = await AsyncStorage.getItem('userData');
+      var user = await AsyncStorage.getItem(String.userData);
       var userData = JSON.parse(user);
 
       if (userData && userData.user && userData.user.uid) {
-        console.log('User', userData);
         this.setState({
           uid: userData.user.uid,
         });
@@ -44,9 +44,7 @@ class AddTaskScreen extends React.Component {
   }
 
   createTodoItem() {
-    console.log('test1', this.state.uid);
     if (this.state.uid) {
-      console.log('test');
       presenter.createTodoItem(
         this.state.uid,
         new Date().getTime(),
@@ -69,7 +67,7 @@ class AddTaskScreen extends React.Component {
       <>
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
           <TextInput
-            label="Title"
+            label={String.title}
             mode="outlined"
             theme={{
               fonts: {regular: {fontWeight: 'bold'}},
@@ -84,7 +82,7 @@ class AddTaskScreen extends React.Component {
           />
 
           <TextInput
-            label="Description"
+            label={String.description}
             mode="outlined"
             theme={{
               fonts: {regular: {fontWeight: 'bold'}},
